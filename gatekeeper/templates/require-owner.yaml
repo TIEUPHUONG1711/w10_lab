@@ -1,0 +1,18 @@
+apiVersion: templates.gatekeeper.sh/v1
+kind: ConstraintTemplate
+metadata:
+  name: k8srequireowner
+spec:
+  crd:
+    spec:
+      names:
+        kind: K8sRequireOwner
+  targets:
+  - target: admission.k8s.gatekeeper.sh
+    rego: |
+      package k8srequireowner
+
+      violation[{"msg": msg}] {
+        not input.review.object.metadata.labels.owner
+        msg := "owner label is required"
+      }
