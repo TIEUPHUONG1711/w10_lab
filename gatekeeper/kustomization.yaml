@@ -1,0 +1,9 @@
+resources:
+- templates/disallow-latest.yaml
+- templates/require-limits.yaml
+- templates/disallow-root.yaml
+- templates/disallow-hostnetwork.yaml
+- constraints/disallow-latest.yaml
+- constraints/require-limits.yaml
+- constraints/disallow-root.yaml
+- constraints/disallow-hostnetwork.yaml
