@@ -3,18 +3,17 @@ kind: Application
 metadata:
   name: rbac
   namespace: argocd
-
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
 spec:
   project: default
-
   source:
     repoURL: https://github.com/TIEUPHUONG1711/w10_lab.git
     targetRevision: main
     path: rbac
- destination:
+  destination:
     server: https://kubernetes.default.svc
     namespace: demo
-
   syncPolicy:
     automated:
       prune: true
