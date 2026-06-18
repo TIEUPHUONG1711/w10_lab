@@ -1,0 +1,48 @@
+name: Build Scan Sign
+
+on:
+  push:
+    branches:
+    - main
+
+jobs:
+  build-scan-sign:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Login GHCR
+      uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Build image
+      run: |
+        docker build -t ghcr.io/${{ github.repository_owner }}/w10-api:${{ github.sha }} ./src/api
+
+    - name: Trivy scan
+      uses: aquasecurity/trivy-action@master
+      with:
+        image-ref: ghcr.io/${{ github.repository_owner }}/w10-api:${{ github.sha }}
+        severity: HIGH,CRITICAL
+        exit-code: 1
+
+    - name: Push image
+      run: |
+        docker push ghcr.io/${{ github.repository_owner }}/w10-api:${{ github.sha }}
+
+    - name: Install Cosign
+      uses: sigstore/cosign-installer@v3
+
+    - name: Cosign sign image
+      run: |
+        cosign sign --yes ghcr.io/${{ github.repository_owner }}/w10-api:${{ github.sha }}
