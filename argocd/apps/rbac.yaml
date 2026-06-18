@@ -8,7 +8,7 @@ spec:
   project: default
 
   source:
-    repoURL: https://github.com/TIEUPHUONG1711/w10_lab.git
+    repoURL: repoURL: https://github.com/TIEUPHUONG1711/w10_lab.git
     targetRevision: main
     path: rbac
  destination:

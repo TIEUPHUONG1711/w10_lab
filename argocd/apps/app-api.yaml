@@ -9,7 +9,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/Vuong-Bach/temp.git
+    repoURL: repoURL: https://github.com/TIEUPHUONG1711/w10_lab.git
     path: app-api
     targetRevision: main
   destination:
