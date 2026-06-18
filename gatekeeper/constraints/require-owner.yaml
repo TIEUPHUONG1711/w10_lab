@@ -4,6 +4,8 @@ metadata:
   name: require-owner
 spec:
   match:
+    namespaces:
+    - demo
     kinds:
     - apiGroups: [""]
       kinds: ["Pod"]
