@@ -9,7 +9,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: image: ghcr.io/vuong-bach/w10-api:0.0.1
+    repoURL: repoURL: https://github.com/Vuong-Bach/temp.git
     path: app-api
     targetRevision: main
   destination:
